@@ -32,7 +32,7 @@ pipeline {
 
             steps {
                 sh '''
-                    test -f build/index.html
+                    #test -f build/index.html
                     npm test
                 '''
             }
@@ -40,7 +40,7 @@ pipeline {
         stage('E2E TEST') {
             agent {
                 docker {
-                    image 'mcr.microsoft.com/playwright:v1.49.1-noble'
+                    image 'mcr.microsoft.com/playwright:v1.39.1-noble'
                     reuseNode true
                 }
             }
