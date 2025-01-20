@@ -41,14 +41,17 @@ pipeline {
             agent {
                 docker {
                     image 'mcr.microsoft.com/playwright:v1.49.1-noble'
+                    pull true
                     reuseNode true
                 }
             }
 
             steps {
                 sh '''
-                    npm install serve
-                    node_modules/.bin/serve -s build &
+                    export DEBUG=pw:api
+                    npm ci
+                    npx playwright install
+                    npx serve -s build &
                     sleep 10
                     npx playwright test
                 '''
@@ -58,7 +61,9 @@ pipeline {
 
     post {
         always {
+            cleanWs()
             junit 'jest-results/junit.xml'
         }
     }
+}
 }
