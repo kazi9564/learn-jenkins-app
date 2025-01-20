@@ -53,14 +53,15 @@ pipeline {
                     npx playwright install
                     npx serve -s build &
                     sleep 10
-                    npx playwright test --reporter=junit
+                    npx playwright test 
                 '''
             }
         }
     }
     post {
         always {
-            junit '**/jest-results/junit.xml'
+            
+            junit 'jest-results/junit.xml'
             cleanWs()
         }
     }
