@@ -41,7 +41,7 @@ pipeline {
             agent {
                 docker {
                     image 'mcr.microsoft.com/playwright:v1.49.1-noble'
-                    pull true
+                    
                     reuseNode true
                 }
             }
